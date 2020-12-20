@@ -1,28 +1,48 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container mt-5">
+    <notifications group="foo"  class="mt-3"/>
+    <add-task />
+    <transition-group enter-active-class="animate__animated animate__fadeInLeft"
+    leave-active-class="animate__animated animate__fadeOutRight" class="row justify-content-center mt-3">
+        <todo-item v-for="(todo, index) in $store.getters['getTodos']" :key="index" :index="index" :todo="todo"/>
+    </transition-group>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AddTask from "./components/AddTask";
+import TodoItem from "./components/TodoItem";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AddTask,
+    TodoItem,
+  },
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    // completeTodo(index) {
+    //   this.todos[index].done = true;
+    //   this.$notify({
+    //         group: 'foo',
+    //         title: 'Completed!',
+    //         text: 'Your Task Is Now Completed!',
+    //     });
+    // }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+label {
+  color: white;
+}
+
+.card {
+  border-radius: 1rem !important;
 }
 </style>
